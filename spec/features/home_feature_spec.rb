@@ -9,7 +9,9 @@ describe 'home page', :type => :feature do
 
   it 'login redirect me to devise login page' do
     visit '/'
-    click_link 'Login'
+    within('.navbar') do
+      click_link 'Login'
+    end
     expect(page).to have_current_path(new_user_session_path)
   end
 end

@@ -1,18 +1,10 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>Welcome to food for the heart</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-5">
-      <%= link_to 'Login', new_user_session_path %>
-    </div>
-    <div class="col-md-2">
-
-    </div>
-    <div class="col-md-5">
-      Assign Meals
-    </div>
+  <div class="jumbotron">
+    <h1>Welcome to food for the heart</h1>
+    <p>We assign you food from the bottom of our heart, according to your likings.</p>
+    <p>
+      <%= link_to('Login', new_user_session_path, :class => 'btn btn-primary btn-lg') %>
+      <%= link_to('Assign Meals', new_user_session_path, :class => 'btn btn-primary btn-lg') %>
+    </p>
   </div>
 </div>

@@ -32,6 +32,7 @@ feature 'user login and assess features' do
       fill_in 'user_password', with: '!abcd1234'
       click_button 'Log in'
     end
+    expect(page).to have_current_path(user_index_path)
     expect(page).to have_content 'Meal Preference'
     expect(page).to have_content 'Meal for the day'
     expect(page).to have_content 'Signed in as sample@email.com'

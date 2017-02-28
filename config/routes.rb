@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   get 'user/index'
   resources :user do
-    resource :preference
+    member do
+      get 'preference/new'
+      get 'preference/edit'
+      put 'preference/update'
+    end
   end
 
   devise_for :users

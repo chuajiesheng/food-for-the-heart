@@ -13,7 +13,7 @@ RSpec.describe ApplicationController, type: :controller do
 
   describe 'after login' do
     it 'returns redirect to user#index' do
-      controller.after_sign_in_path_for(@user).should == user_index_path
+      controller.after_sign_in_path_for(@user) == user_index_path
     end
   end
 end

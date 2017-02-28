@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get 'user/index'
+  resources :user do
+    resource :preference
+  end
 
   devise_for :users
   root 'home#index'

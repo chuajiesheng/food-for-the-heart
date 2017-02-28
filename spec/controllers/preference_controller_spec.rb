@@ -17,8 +17,13 @@ RSpec.describe PreferenceController, type: :controller do
       end
 
       it 'allows authenticated access' do
-        get :new, id: 1
+        get :new, id: user.id
         expect(response).to have_http_status(:success)
+      end
+
+      it 'does not allow access another user preference' do
+        get :new, id: 42
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end
@@ -39,8 +44,13 @@ RSpec.describe PreferenceController, type: :controller do
       end
 
       it 'allows authenticated access' do
-        get :edit, id: 1
+        get :edit, id: user.id
         expect(response).to have_http_status(:success)
+      end
+
+      it 'does not allow access another user preference' do
+        get :edit, id: 42
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end
@@ -61,8 +71,13 @@ RSpec.describe PreferenceController, type: :controller do
       end
 
       it 'allows authenticated access' do
-        put :update, id: 1
+        put :update, id: user.id
         expect(response).to have_http_status(:success)
+      end
+
+      it 'does not allow access another user preference' do
+        put :update, id: 42
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end

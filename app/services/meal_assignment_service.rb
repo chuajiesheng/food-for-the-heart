@@ -27,24 +27,26 @@ class MealAssignmentService
         'squid' => availability.squid
     }
     users.each do |user|
-      if user.preference
-        user.preference.to_array.each do |preference|
-          if meals_left[preference] > 0
-            meals_left[preference] -= 1
-            Meal.create!(user: user, meal_availability: availability, meal_type: preference)
-          end
-        end
-      else
-        most_meals_left = meals_left.sort_by { |_key, value| value }.last
+      add_meal(availability, meals_left, user)
+    end
+  end
 
-        meal_type = most_meals_left[0]
-        meal_count = most_meals_left[1]
+  private
 
-        if meal_count > 0
-          meals_left[meal_type] -= 1
-          Meal.create!(user: user, meal_availability: availability, meal_type: meal_type)
-        end
+  def add_meal(availability, meals_left, user)
+    if user.preference
+      user.preference.to_array.each do |preference|
+        next if meals_left[preference] < 1
+
+        meals_left[preference] -= 1
+        Meal.create!(user: user, meal_availability: availability, meal_type: preference)
       end
+    else
+      meal_type, meal_count = meals_left.sort_by { |_key, value| value }.last
+      return if meal_count < 1
+
+      meals_left[meal_type] -= 1
+      Meal.create!(user: user, meal_availability: availability, meal_type: meal_type)
     end
   end
 end

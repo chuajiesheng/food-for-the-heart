@@ -29,7 +29,7 @@ class MealAssignmentService
       user.preference.to_array.each do |preference|
         if meals_left[preference] > 0
           meals_left[preference] -= 1
-          Meal.create!(user: user, meal_type: preference)
+          Meal.create!(user: user, meal_availability: availability, meal_type: preference)
         end
       end
     end

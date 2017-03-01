@@ -1,4 +1,6 @@
 class MealAvailability < ApplicationRecord
+  has_many :meals
+
   before_save :default_value
 
   def default_value

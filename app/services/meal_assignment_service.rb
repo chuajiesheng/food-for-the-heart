@@ -1,8 +1,4 @@
 class MealAssignmentService
-  def initialize
-
-  end
-
   def generate_meal_availability(no_of_users)
     meals_count = (no_of_users - 5) + rand(5 * 2)
     availability = MealAvailability.create!(availability_for: Time.zone.now)
@@ -19,6 +15,22 @@ class MealAssignmentService
   end
 
   def meal_assignment(users)
-    users[0].meals = [Meal.create!(user: users[0], meal_type: 'chicken')]
+    availability = MealAvailability.last
+    meals_left = {
+        'chicken' => availability.chicken,
+        'mutton' => availability.mutton,
+        'beef' => availability.beef,
+        'fish' => availability.fish,
+        'prawn' => availability.prawn,
+        'squid' => availability.squid
+    }
+
+    users.each do |user|
+      user.preference.to_array.each do |preference|
+        if meals_left[preference] > 0
+          Meal.create!(user: user, meal_type: preference)
+        end
+      end
+    end
   end
 end

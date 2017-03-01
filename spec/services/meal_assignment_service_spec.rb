@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'MealAssignmentService' do
+  before do
+    srand(42)
+  end
+
   describe '#generate_meal_availability' do
     let(:service) { MealAssignmentService.new }
 
@@ -9,10 +13,6 @@ RSpec.describe 'MealAssignmentService' do
     end
 
     context 'it generate a random for each meal type' do
-      before do
-        srand(42)
-      end
-
       it 'generate a minimum number of meals which is the number of user minus 5' do
         meal_availability = service.generate_meal_availability(10)
         expect(meal_availability.total).to eq(10)
@@ -73,6 +73,18 @@ RSpec.describe 'MealAssignmentService' do
       service.generate_meal_availability(5)
       service.meal_assignment([user])
       expect(user.reload.meals.last.meal_type).to eq('chicken')
+    end
+
+    it 'assign meal based on user preference' do
+      service = MealAssignmentService.new
+      users = [FactoryGirl.create(:user), FactoryGirl.create(:user, email: 'new@email.com')]
+
+      user_0_preference = FactoryGirl.create(:preference, user: users[0], chicken: true)
+      user_1_preference = FactoryGirl.create(:preference, user: users[1], fish: true, prawn: true)
+
+      service.generate_meal_availability(10)
+      service.meal_assignment(users)
+      expect(users[1].reload.meals.last.meal_type).to eq('prawn')
     end
   end
 end

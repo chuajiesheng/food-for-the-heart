@@ -13,6 +13,8 @@ class MealAssignmentService
       meals_count -= meal
     end
 
+    availability.save!
+
     return availability
   end
 end

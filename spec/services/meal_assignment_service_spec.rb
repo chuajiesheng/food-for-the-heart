@@ -14,45 +14,43 @@ RSpec.describe 'MealAssignmentService' do
       end
 
       it 'generate a minimum number of meals which is the number of user minus 5' do
-        no_of_users = 10
-        meal_availability = service.generate_meal_availability(no_of_users)
+        meal_availability = service.generate_meal_availability(10)
         expect(meal_availability.total).to eq(10)
       end
 
       it 'generate 3 chicken' do
-        no_of_users = 10
-        meal_availability = service.generate_meal_availability(no_of_users)
+        meal_availability = service.generate_meal_availability(10)
         expect(meal_availability.chicken).to eq(3)
       end
 
       it 'generate 4 mutton' do
-        no_of_users = 10
-        meal_availability = service.generate_meal_availability(no_of_users)
+        meal_availability = service.generate_meal_availability(10)
         expect(meal_availability.mutton).to eq(4)
       end
 
       it 'generate 2 beef' do
-        no_of_users = 10
-        meal_availability = service.generate_meal_availability(no_of_users)
+        meal_availability = service.generate_meal_availability(10)
         expect(meal_availability.beef).to eq(2)
       end
 
       it 'generate 0 fish' do
-        no_of_users = 10
-        meal_availability = service.generate_meal_availability(no_of_users)
+        meal_availability = service.generate_meal_availability(10)
         expect(meal_availability.fish).to eq(0)
       end
 
       it 'generate 1 prawn' do
-        no_of_users = 10
-        meal_availability = service.generate_meal_availability(no_of_users)
+        meal_availability = service.generate_meal_availability(10)
         expect(meal_availability.prawn).to eq(1)
       end
 
       it 'generate 0 squid' do
-        no_of_users = 10
-        meal_availability = service.generate_meal_availability(no_of_users)
+        meal_availability = service.generate_meal_availability(10)
         expect(meal_availability.squid).to eq(0)
+      end
+
+      it 'save after generating all the meal' do
+        meal_availability = service.generate_meal_availability(10)
+        expect(meal_availability.reload.total).to eq(10)
       end
     end
 

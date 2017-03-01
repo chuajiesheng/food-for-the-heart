@@ -70,6 +70,15 @@ RSpec.describe PreferenceController, type: :controller do
         get :edit, params: { id: user.id }
         expect(assigns(:preference)).to match(preference)
       end
+
+      context 'when preference is not created' do
+        let!(:preference) { nil }
+
+        it 'redirect the user to new path' do
+          get :edit, params: { id: user.id }
+          expect(response).to redirect_to(preference_new_user_path)
+        end
+      end
     end
   end
 

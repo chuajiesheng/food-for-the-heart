@@ -12,6 +12,10 @@ class PreferenceController < ApplicationController
   end
 
   def edit
+    unless current_user.preference
+      return redirect_to preference_new_user_path
+    end
+
     @preference = current_user.preference
   end
 

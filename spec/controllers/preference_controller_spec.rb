@@ -15,11 +15,6 @@ RSpec.describe PreferenceController, type: :controller do
         sign_in user
       end
 
-      it 'allows authenticated access' do
-        get :new, id: user.id
-        expect(response).to have_http_status(:success)
-      end
-
       it 'does not allow access another user preference' do
         get :new, id: 42
         expect(response).to have_http_status(:forbidden)
@@ -36,6 +31,11 @@ RSpec.describe PreferenceController, type: :controller do
         it 'should not create a new preference' do
           expect { get :new, id: user.id }.to_not change { user.reload.preference }
         end
+      end
+
+      it 'should redirect to edit page for view/edit' do
+        get :new, id: user.id
+        expect(response).to redirect_to(preference_edit_user_path)
       end
     end
   end

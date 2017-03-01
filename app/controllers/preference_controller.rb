@@ -6,6 +6,7 @@ class PreferenceController < ApplicationController
     unless current_user.preference
       current_user.preference = Preference.create
     end
+    redirect_to preference_edit_user_path
   end
 
   def edit

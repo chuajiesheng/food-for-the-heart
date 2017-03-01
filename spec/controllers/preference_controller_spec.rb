@@ -50,6 +50,7 @@ RSpec.describe PreferenceController, type: :controller do
 
     describe 'user signed in' do
       let(:user) { FactoryGirl.create(:user) }
+      let!(:preference) { FactoryGirl.create(:preference, user: user)}
 
       before do
         sign_in user
@@ -63,6 +64,11 @@ RSpec.describe PreferenceController, type: :controller do
       it 'does not allow access another user preference' do
         get :edit, id: 42
         expect(response).to have_http_status(:forbidden)
+      end
+
+      it 'assign the preference object' do
+        get :edit, id: user.id
+        expect(assigns(:preference)).to match(preference)
       end
     end
   end

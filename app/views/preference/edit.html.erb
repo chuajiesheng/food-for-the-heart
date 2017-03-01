@@ -1,0 +1,43 @@
+<%= form_for @preference, url: preference_update_user_path do |f| %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-1">
+        Meat:
+      </div>
+      <div class="col-md-1">
+        <%= f.label :chicken %>
+        <%= f.check_box :chicken %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :mutton %>
+        <%= f.check_box :mutton %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :beef %>
+        <%= f.check_box :beef %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        Seafood:
+      </div>
+      <div class="col-md-1">
+        <%= f.label :fish %>
+        <%= f.check_box :fish %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :prawn %>
+        <%= f.check_box :prawn %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :squid %>
+        <%= f.check_box :squid %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        <%= f.submit :class => 'btn btn-default' %>
+      </div>
+    </div>
+  </div>
+<% end %>

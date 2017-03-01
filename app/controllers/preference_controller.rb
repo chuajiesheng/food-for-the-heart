@@ -10,7 +10,7 @@ class PreferenceController < ApplicationController
   end
 
   def edit
-
+    @preference = current_user.preference
   end
 
   def update

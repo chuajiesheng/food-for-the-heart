@@ -83,19 +83,23 @@ RSpec.describe PreferenceController, type: :controller do
 
     describe 'user signed in' do
       let(:user) { FactoryGirl.create(:user) }
+      let!(:preference) { FactoryGirl.create(:preference, user: user)}
 
       before do
         sign_in user
       end
 
-      it 'allows authenticated access' do
-        put :update, id: user.id
-        expect(response).to have_http_status(:success)
-      end
-
       it 'does not allow access another user preference' do
         put :update, id: 42
         expect(response).to have_http_status(:forbidden)
+      end
+
+      it 'update the preference object' do
+        params = {
+            :id => user.id,
+            :preference => {:chicken => '1', :mutton => '0', :beef => '0', :fish => '0', :prawn => '0', :squid => '0'}
+        }
+        expect { put :update, params }.to change { user.preference.reload.chicken? }
       end
     end
   end

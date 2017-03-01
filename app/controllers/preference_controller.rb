@@ -14,7 +14,7 @@ class PreferenceController < ApplicationController
   end
 
   def update
-
+    current_user.preference.update(params[:preference].permit!)
   end
 
   private

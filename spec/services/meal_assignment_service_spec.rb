@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'MealAssignmentService' do
-  describe 'generate random meal amount' do
+  describe '#generate_meal_availability' do
     let(:service) { MealAssignmentService.new }
 
     it 'generate a random meal availability record' do
@@ -53,7 +53,16 @@ RSpec.describe 'MealAssignmentService' do
         expect(meal_availability.reload.total).to eq(10)
       end
     end
+  end
 
+  describe '#meal_assignment' do
+    it 'assign meal based on user preference' do
+      service = MealAssignmentService.new
+      user = FactoryGirl.create(:user)
+      preference = FactoryGirl.create(:preference, user: user, chicken: true)
 
+      service.generate_meal_availability(5)
+      expect { service.meal_assignment([user]) }.to change { user.meals.count }.by(1)
+    end
   end
 end

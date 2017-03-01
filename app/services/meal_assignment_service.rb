@@ -17,4 +17,8 @@ class MealAssignmentService
 
     return availability
   end
+
+  def meal_assignment(users)
+    users[0].meals = [Meal.create!(user: users[0])]
+  end
 end

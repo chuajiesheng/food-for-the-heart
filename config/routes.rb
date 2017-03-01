@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       get 'preference/new'
       get 'preference/edit'
       put 'preference/update'
+
+      get 'meal/show'
+      get 'meal', to: 'meal#show'
     end
   end
 

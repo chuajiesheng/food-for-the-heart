@@ -24,4 +24,12 @@ RSpec.describe 'routes', :type => :routing do
   it 'routes /user/1/preference/ to preference#new' do
     expect(:get => '/user/1/preference/').to route_to(:controller => 'preference', :action => 'new', :id => '1')
   end
+
+  it 'routes /user/1/meal/show to meal#new' do
+    expect(:get => '/user/1/meal/show').to route_to(:controller => 'meal', :action => 'show', :id => '1')
+  end
+
+  it 'routes /user/1/meal to meal#new' do
+    expect(:get => '/user/1/meal/').to route_to(:controller => 'meal', :action => 'show', :id => '1')
+  end
 end

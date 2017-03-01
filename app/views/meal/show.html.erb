@@ -1,2 +1,9 @@
-<h1>Meal#show</h1>
-<p>Find me in app/views/meal/show.html.erb</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Assigned Meal</h1>
+      <h3><%= @meal.meal_type.capitalize %></h3>
+      <p>Assigned at <%= @meal.meal_availability.availability_for %></p>
+    </div>
+  </div>
+</div>

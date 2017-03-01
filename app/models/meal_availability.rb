@@ -1,0 +1,2 @@
+class MealAvailability < ApplicationRecord
+end

@@ -53,6 +53,17 @@ RSpec.describe 'MealAssignmentService' do
         expect(meal_availability.reload.total).to eq(10)
       end
     end
+
+    context 'when the total rand meal count is negative' do
+      before do
+        srand(-20)
+      end
+
+      it 'should not assign any meal type' do
+        meal_availability = service.generate_meal_availability(0)
+        expect(meal_availability.total).to eq(0)
+      end
+    end
   end
 
   describe '#meal_assignment' do

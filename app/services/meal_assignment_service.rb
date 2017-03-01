@@ -4,6 +4,8 @@ class MealAssignmentService
     availability = MealAvailability.create!(availability_for: Time.zone.now)
 
     ['chicken', 'mutton', 'beef', 'fish', 'prawn', 'squid'].each do |attr|
+      break if meals_count < 1
+      
       meal = rand(meals_count)
       availability.send("#{attr}=", meal)
       meals_count -= meal

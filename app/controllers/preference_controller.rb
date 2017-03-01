@@ -2,6 +2,8 @@ class PreferenceController < ApplicationController
   before_action :authenticate_user!
   before_action :check_correct_user!
 
+  ACCEPTABLE_PREFERENCE_ATTRIBUTES = [:chicken, :mutton, :beef, :fish, :prawn, :squid]
+
   def new
     unless current_user.preference
       current_user.preference = Preference.create
@@ -14,7 +16,8 @@ class PreferenceController < ApplicationController
   end
 
   def update
-    current_user.preference.update(params[:preference].permit!)
+
+    current_user.preference.update(params[:preference].permit(ACCEPTABLE_PREFERENCE_ATTRIBUTES))
   end
 
   private

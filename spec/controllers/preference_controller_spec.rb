@@ -101,6 +101,14 @@ RSpec.describe PreferenceController, type: :controller do
         }
         expect { put :update, params }.to change { user.preference.reload.chicken? }
       end
+
+      it 'should not accept random attribute' do
+        params = {
+            :id => user.id,
+            :preference => {:chicken => '1', :mutton => '0', :beef => '0', :fish => '0', :prawn => '0', :squid => '0', :random => '123'}
+        }
+        expect { put :update, params: params }.to_not raise_error
+      end
     end
   end
 end

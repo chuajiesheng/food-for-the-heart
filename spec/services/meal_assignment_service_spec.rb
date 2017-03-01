@@ -86,5 +86,17 @@ RSpec.describe 'MealAssignmentService' do
       service.meal_assignment(users)
       expect(users[1].reload.meals.last.meal_type).to eq('prawn')
     end
+
+    it 'assign meal based on the remaining availablity' do
+      service = MealAssignmentService.new
+      users = [FactoryGirl.create(:user), FactoryGirl.create(:user, email: 'new@email.com')]
+
+      user_0_preference = FactoryGirl.create(:preference, user: users[0], prawn: true)
+      user_1_preference = FactoryGirl.create(:preference, user: users[1], fish: true, prawn: true)
+
+      service.generate_meal_availability(10)
+      service.meal_assignment(users)
+      expect(users[1].reload.meals.count).to eq(0)
+    end
   end
 end

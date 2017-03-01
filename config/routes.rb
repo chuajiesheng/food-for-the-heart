@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'user/index'
   resources :user do
     member do
+      get 'preference', to: 'preference#new'
       get 'preference/new'
       get 'preference/edit'
       put 'preference/update'

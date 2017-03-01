@@ -3,7 +3,7 @@ class MealAssignmentService
 
   end
 
-  def generate_meal_availability
-    MealAvailability.create!
+  def generate_meal_availability(no_of_users)
+    return MealAvailability.create!
   end
 end

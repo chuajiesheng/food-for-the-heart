@@ -16,7 +16,11 @@ class PreferenceController < ApplicationController
   end
 
   def update
-    if current_user.preference.update(params[:preference].permit(ACCEPTABLE_PREFERENCE_ATTRIBUTES))
+    unless current_user.preference
+      return redirect_to preference_new_user_path
+    end
+
+    if current_user.preference.update!(params[:preference].permit(ACCEPTABLE_PREFERENCE_ATTRIBUTES))
       flash[:notice] = 'Preference updated'
     end
   end

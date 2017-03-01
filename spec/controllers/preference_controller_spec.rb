@@ -118,6 +118,19 @@ RSpec.describe PreferenceController, type: :controller do
         put :update, params: params
         expect(flash[:notice]).to eq('Preference updated')
       end
+
+      context 'when preference is not created' do
+        let!(:preference) { nil }
+
+        it 'redirect the user to new path' do
+          params = {
+              :id => user.id,
+              :preference => {:chicken => 'some junk', :mutton => '10', :beef => '0', :fish => '0', :prawn => '0', :squid => '0'}
+          }
+          put :update, params: params
+          expect(response).to redirect_to(preference_new_user_path)
+        end
+      end
     end
   end
 end

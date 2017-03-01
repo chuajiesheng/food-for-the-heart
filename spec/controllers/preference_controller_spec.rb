@@ -109,6 +109,15 @@ RSpec.describe PreferenceController, type: :controller do
         }
         expect { put :update, params: params }.to_not raise_error
       end
+
+      it 'should tell the user that is updated' do
+        params = {
+            :id => user.id,
+            :preference => {:chicken => '1', :mutton => '0', :beef => '0', :fish => '0', :prawn => '0', :squid => '0', :random => '123'}
+        }
+        put :update, params: params
+        expect(flash[:notice]).to eq('Preference updated')
+      end
     end
   end
 end

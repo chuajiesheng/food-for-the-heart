@@ -16,8 +16,9 @@ class PreferenceController < ApplicationController
   end
 
   def update
-
-    current_user.preference.update(params[:preference].permit(ACCEPTABLE_PREFERENCE_ATTRIBUTES))
+    if current_user.preference.update(params[:preference].permit(ACCEPTABLE_PREFERENCE_ATTRIBUTES))
+      flash[:notice] = 'Preference updated'
+    end
   end
 
   private

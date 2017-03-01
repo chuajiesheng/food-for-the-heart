@@ -1,2 +1,34 @@
-<h1>MealAssignment#index</h1>
-<p>Find me in app/views/meal_assignment/index.html.erb</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Meal Availability</h1>
+      <table class="table table-striped">
+        <tr>
+          <th>Type</th>
+          <th>Availability</th>
+        </tr>
+        <tr><td>Chicken</td><td><%= @meal_availability.chicken %></td></tr>
+        <tr><td>Mutton</td><td><%= @meal_availability.mutton%></td></tr>
+        <tr><td>Beef</td><td><%= @meal_availability.beef %></td></tr>
+        <tr><td>Fish</td><td><%= @meal_availability.fish %></td></tr>
+        <tr><td>Prawn</td><td><%= @meal_availability.prawn %></td></tr>
+        <tr><td>Squid</td><td><%= @meal_availability.squid %></td></tr>
+        <tr><td>Total</td><td><%= @meal_availability.total %></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Meal Assignment</h1>
+      <table class="table table-striped">
+        <tr>
+          <th>Meal Type</th>
+          <th>User</th>
+        </tr>
+        <% @meal_availability.meals.each do |meal| %>
+            <tr><td><%= meal.meal_type.capitalize %></td><td><%= meal.user.email %></td></tr>
+        <%end %>
+      </table>
+    </div>
+  </div>
+</div>

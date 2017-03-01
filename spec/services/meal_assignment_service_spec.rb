@@ -109,5 +109,16 @@ RSpec.describe 'MealAssignmentService' do
       service.meal_assignment(users)
       expect(users[1].reload.meals.count).to eq(0)
     end
+
+    context 'when there is a user but does not have preference' do
+      it 'assign the first available meal type' do
+        service = MealAssignmentService.new
+        users = [FactoryGirl.create(:user)]
+
+        service.generate_meal_availability(10)
+        service.meal_assignment(users)
+        expect(users[0].reload.meals.count).to eq(1)
+      end
+    end
   end
 end

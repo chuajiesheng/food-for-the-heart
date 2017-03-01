@@ -5,7 +5,7 @@ class MealAssignmentService
 
     ['chicken', 'mutton', 'beef', 'fish', 'prawn', 'squid'].each do |attr|
       break if meals_count < 1
-      
+
       meal = rand(meals_count)
       availability.send("#{attr}=", meal)
       meals_count -= meal
@@ -26,12 +26,23 @@ class MealAssignmentService
         'prawn' => availability.prawn,
         'squid' => availability.squid
     }
-
     users.each do |user|
-      user.preference.to_array.each do |preference|
-        if meals_left[preference] > 0
-          meals_left[preference] -= 1
-          Meal.create!(user: user, meal_availability: availability, meal_type: preference)
+      if user.preference
+        user.preference.to_array.each do |preference|
+          if meals_left[preference] > 0
+            meals_left[preference] -= 1
+            Meal.create!(user: user, meal_availability: availability, meal_type: preference)
+          end
+        end
+      else
+        most_meals_left = meals_left.sort_by { |_key, value| value }.last
+
+        meal_type = most_meals_left[0]
+        meal_count = most_meals_left[1]
+
+        if meal_count > 0
+          meals_left[meal_type] -= 1
+          Meal.create!(user: user, meal_availability: availability, meal_type: meal_type)
         end
       end
     end

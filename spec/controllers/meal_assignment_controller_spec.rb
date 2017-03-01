@@ -16,7 +16,12 @@ RSpec.describe MealAssignmentController, type: :controller do
     end
 
     it 'call MealAssignmentService to generate meal availability' do
-      expect_any_instance_of(MealAssignmentService).to receive(:generate_meal_availability).with(4)
+      expect_any_instance_of(MealAssignmentService).to receive(:generate_meal_availability).with(4).and_call_original
+      get :index
+    end
+
+    it 'call MealAssignmentService to assign meal' do
+      expect_any_instance_of(MealAssignmentService).to receive(:meal_assignment).with(User.all)
       get :index
     end
   end

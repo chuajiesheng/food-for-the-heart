@@ -8,7 +8,6 @@ RSpec.describe PreferenceController, type: :controller do
         expect(response).to redirect_to(new_user_session_path)
       end
     end
-
     describe 'user signed in' do
       let(:user) { FactoryGirl.create(:user) }
 
@@ -24,6 +23,11 @@ RSpec.describe PreferenceController, type: :controller do
       it 'does not allow access another user preference' do
         get :new, id: 42
         expect(response).to have_http_status(:forbidden)
+      end
+
+      it 'should create a preference if there is none exist' do
+        get :new, id: user.id
+        expect(user.preference).to be
       end
     end
   end

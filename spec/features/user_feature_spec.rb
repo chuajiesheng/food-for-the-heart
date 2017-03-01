@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-feature 'user login and assess features' do
+feature 'complete user features' do
   background do
     @user = FactoryGirl.create(:user)
   end
 
-  scenario 'able to indicate my preference' do
+  scenario 'indicate preference and assign meal' do
     visit '/'
     within('.navbar') do
       click_link 'Login'
@@ -28,5 +28,18 @@ feature 'user login and assess features' do
     end
     expect(page.has_checked_field?('Mutton'))
     expect(page.has_checked_field?('Prawn'))
+    within('.navbar') do
+      click_link 'Food for the heart'
+    end
+    within('.jumbotron') do
+      click_link 'Assign Meals'
+    end
+    expect(page).to have_current_path(meal_assignment_index_path)
+    expect(page).to have_content 'Meal Availability'
+    expect(page).to have_content 'Meal Assignment'
+    within('.navbar') do
+      click_link 'Meal for the day'
+    end
+    expect(page).to have_content 'Assigned Meal'
   end
 end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'meal_assignment/index'
+  get 'meal_assignment', to: 'meal_assignment#index'
 
   get 'user/index'
   resources :user do

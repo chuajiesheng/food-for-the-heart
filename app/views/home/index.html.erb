@@ -3,8 +3,12 @@
     <h1>Welcome to food for the heart</h1>
     <p>We assign you food from the bottom of our heart, according to your likings.</p>
     <p>
-      <%= link_to('Login', new_user_session_path, :class => 'btn btn-primary btn-lg') %>
-      <%= link_to('Assign Meals', new_user_session_path, :class => 'btn btn-primary btn-lg') %>
+      <% if user_signed_in? %>
+        <%= link_to('Meal Preference', preference_new_user_path(current_user.id), :class => 'btn btn-primary btn-lg') %>
+      <% else %>
+        <%= link_to('Login', new_user_session_path, :class => 'btn btn-primary btn-lg') %>
+      <% end %>
+      <%= link_to('Assign Meals', meal_assignment_index_path, :class => 'btn btn-primary btn-lg') %>
     </p>
   </div>
 </div>

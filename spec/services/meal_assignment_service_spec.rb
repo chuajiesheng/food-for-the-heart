@@ -64,5 +64,15 @@ RSpec.describe 'MealAssignmentService' do
       service.generate_meal_availability(5)
       expect { service.meal_assignment([user]) }.to change { user.meals.count }.by(1)
     end
+
+    it 'assign meal based on user preference' do
+      service = MealAssignmentService.new
+      user = FactoryGirl.create(:user)
+      preference = FactoryGirl.create(:preference, user: user, chicken: true)
+
+      service.generate_meal_availability(5)
+      service.meal_assignment([user])
+      expect(user.reload.meals.last.meal_type).to eq('chicken')
+    end
   end
 end

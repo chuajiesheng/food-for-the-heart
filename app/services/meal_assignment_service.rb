@@ -19,6 +19,6 @@ class MealAssignmentService
   end
 
   def meal_assignment(users)
-    users[0].meals = [Meal.create!(user: users[0])]
+    users[0].meals = [Meal.create!(user: users[0], meal_type: 'chicken')]
   end
 end

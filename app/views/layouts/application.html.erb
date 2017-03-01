@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <% if user_signed_in? %>
-                <li><a href="#">Meal Preference</a></li>
+                <li><%= link_to('Meal Preference', preference_new_user_path(current_user.id)) %></li>
                 <li><a href="#">Meal for the day</a></li>
             <% else %>
                 <li><a href="#">Assign meals</a></li>

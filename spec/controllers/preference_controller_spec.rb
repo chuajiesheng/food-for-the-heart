@@ -140,6 +140,15 @@ RSpec.describe PreferenceController, type: :controller do
           expect(response).to redirect_to(preference_new_user_path)
         end
       end
+
+      it 'redirect to edit after update is completed' do
+        params = {
+            :id => user.id,
+            :preference => {:chicken => '1', :mutton => '0', :beef => '0', :fish => '0', :prawn => '0', :squid => '0', :random => '123'}
+        }
+        put :update, params: params
+        expect(response).to redirect_to(preference_edit_user_path)
+      end
     end
   end
 end

@@ -27,6 +27,8 @@ class PreferenceController < ApplicationController
     if current_user.preference.update!(params[:preference].permit(ACCEPTABLE_PREFERENCE_ATTRIBUTES))
       flash[:notice] = 'Preference updated'
     end
+
+    redirect_to preference_edit_user_path
   end
 
   private

@@ -12,6 +12,7 @@
 2. Capybara used to drive UI testing (instead of using view spec).
 3. Minimum Gems used to reduce upgrade hell.
 4. Email recovering is not configured until requested/required.
+5. Bootstrap import via CDN instead of Gem
 
 ## Development Environment
 

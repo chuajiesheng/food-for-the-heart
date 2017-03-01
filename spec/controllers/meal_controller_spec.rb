@@ -25,6 +25,17 @@ RSpec.describe MealController, type: :controller do
         get :show, params: { id: 42 }
         expect(response).to have_http_status(:forbidden)
       end
+
+      context 'when assigned a meal' do
+        let(:meal_availability) { FactoryGirl.create(:meal_availability) }
+        let!(:meal) { FactoryGirl.create(:meal, user: user, meal_availability: meal_availability, meal_type: 'chicken')}
+
+        it 'assign meal object to display' do
+          get :show, params: { id: user.id }
+          expect(assigns(:meal)).to match(meal)
+        end
+      end
+
     end
   end
 end

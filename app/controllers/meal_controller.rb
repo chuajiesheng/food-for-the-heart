@@ -3,6 +3,7 @@ class MealController < ApplicationController
   before_action :check_correct_user!
 
   def show
+    @meal = current_user.meals.last
   end
 
   private

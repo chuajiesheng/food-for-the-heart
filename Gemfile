@@ -21,6 +21,7 @@ gem 'devise'
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-remote'
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
   gem 'factory_girl_rails'

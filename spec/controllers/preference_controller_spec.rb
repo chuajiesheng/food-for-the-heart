@@ -29,6 +29,14 @@ RSpec.describe PreferenceController, type: :controller do
         get :new, id: user.id
         expect(user.preference).to be
       end
+
+      context 'when there is a preference created' do
+        let!(:preference) { FactoryGirl.create(:preference, user: user)}
+
+        it 'should not create a new preference' do
+          expect { get :new, id: user.id }.to_not change { user.reload.preference }
+        end
+      end
     end
   end
 

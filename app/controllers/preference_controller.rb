@@ -3,7 +3,9 @@ class PreferenceController < ApplicationController
   before_action :check_correct_user!
 
   def new
-    current_user.preference = Preference.create
+    unless current_user.preference
+      current_user.preference = Preference.create
+    end
   end
 
   def edit

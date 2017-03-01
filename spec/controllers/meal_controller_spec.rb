@@ -36,6 +36,11 @@ RSpec.describe MealController, type: :controller do
         end
       end
 
+      it 'dont assign meal object if there is none' do
+        get :show, params: { id: user.id }
+        expect(assigns(:meal)).to be_nil
+      end
+
     end
   end
 end
